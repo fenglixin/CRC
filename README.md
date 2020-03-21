@@ -32,11 +32,29 @@ This is an W-bit value that should be specified as a
    the REFOUT) stage before the value is returned as the official
    checksum
 
+#some detail about modbus CRC(CRC-16/MODBUS) algorithm quote from URL
+http://modbus.org/docs/PI_MBUS_300.pdf
+page 112-113
+A procedure for generating a CRC is:
+1. Load a 16–bit register with FFFF hex (all 1’s). Call this the CRC register.
+2. Exclusive OR the first 8–bit byte of the message with the low–order byte
+of the 16–bit CRC register, putting the result in the CRC register.
+3. Shift the CRC register one bit to the right (toward the LSB), zero–filling the
+MSB. Extract and examine the LSB.
+4. (If the LSB was 0): Repeat Step 3 (another shift).
+(If the LSB was 1): Exclusive OR the CRC register with the polynomial
+value A001 hex (1010 0000 0000 0001).
+5. Repeat Steps 3 and 4 until 8 shifts have been performed. When this is
+done, a complete 8–bit byte will have been processed.
+6. Repeat Steps 2 through 5 for the next 8–bit byte of the message.
+Continue doing this until all bytes have been processed.
+7. The final contents of the CRC register is the CRC value.
+8. When the CRC is placed into the message, its upper and lower bytes
+must be swapped as described below.
 
 
+More crc catelogue  in 
+http://reveng.sourceforge.net/crc-catalogue/16.htm
 
-
-
-
-                 Check   Poly   Init     RefIn  RefOut   XorOut
-CRC-16/MODBUS 	0x4B37 	0x8005 	0xFFFF 	true 	true 	0x0000
+                Check   Poly    Init         RefIn   RefOut   XorOut
+CRC-16/MODBUS 	0x4B37 	0x8005 	0xFFFF  	true 	true 	 0x0000
