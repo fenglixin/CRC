@@ -56,5 +56,5 @@ must be swapped as described below.
 More crc catelogue  in 
 http://reveng.sourceforge.net/crc-catalogue/16.htm
 
-name |       Check  | Poly  |  Init  |     RefIn |  RefOut |  XorOut
-CRC-16/MODBUS|0x4B37|0x8005|0xFFFF|true|true|0x0000
+name | Check  | Poly  |  Init  | RefIn | RefOut |  XorOut
+CRC-16/MODBUS | 0x4B37|0x8005|0xFFFF|true|true|0x0000
